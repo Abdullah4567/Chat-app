@@ -41,14 +41,14 @@ const Login = () => {
                 <div>
                     <TextField
                         required
-                        id="outlined-required"
+                        id="name"
                         label="Name"
                         autoComplete='off'
                         size='small'
                     />
                     <TextField
                         required
-                        id="outlined-required"
+                        id="email"
                         label="Email Address"
                         autoComplete='off'
                         size='small'

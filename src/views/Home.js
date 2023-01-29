@@ -13,7 +13,6 @@ const Home = () => {
   return (
     <>
       <Container maxWidth="sm" sx={{
-        border: "2px solid red",
         p: "1%"
       }}>
         <Paper elevation={20} sx={
@@ -42,7 +41,9 @@ const Home = () => {
             justifyContent: "center",
           }}>
             <Tabs value={value} onChange={handleChange}>
-              <Tab label="Login" />
+              <Tab label="Login" sx={{
+                marginRight: "100px"
+              }} />
               <Tab label="SignUp" />
             </Tabs>
           </Box>
