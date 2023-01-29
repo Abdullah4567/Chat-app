@@ -97,7 +97,8 @@ const SignUp = () => {
                             <Typography variant="p" component="span" fontFamily="sans-serif" marginTop={1} fontWeight={"light"}>
                                 Upload Your picture
                             </Typography>
-                            <Input type="File" name="picture" required disableUnderline
+                            <Input type="File" accept="image/jpeg,image/png" name="picture"
+                                required disableUnderline
                                 onChange={(e) => {
                                     setInfo({
                                         ...Info,
