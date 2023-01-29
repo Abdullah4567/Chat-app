@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -9,10 +9,19 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const [Info, setInfo] = useState({
+        email: '',
+        password: '',
+    });
+    const handleChange = (e) => {
+        setInfo({
+            ...Info,
+            [e.target.name]: e.target.value,
+        });
+    }
     const handleClickShowPassword = (e) => {
         e.preventDefault();
         setShowPassword(!showPassword);
-        console.log(showPassword);
     };
     const ShowButton = () => {
         const noPointer = { cursor: 'pointer' };
@@ -21,6 +30,10 @@ const Login = () => {
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton >
         )
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(Info)
     }
     return (
         <>
@@ -41,19 +54,25 @@ const Login = () => {
                 <div>
                     <TextField
                         required
+                        name="email"
+                        value={Info.email}
                         id="outlined-required"
                         label="Email Address"
                         autoComplete='off'
                         size='small'
+                        onChange={handleChange}
                     />
                     <TextField
                         required
+                        name="password"
+                        value={Info.password}
                         id="outlined-password-input"
                         label="Password"
                         autoComplete="current-password"
                         size='small'
                         InputProps={{ endAdornment: <ShowButton /> }}
                         type={`${showPassword ? 'text' : 'password'}`}
+                        onChange={handleChange}
                     />
                 </div>
                 <Box sx={{
@@ -61,14 +80,18 @@ const Login = () => {
                     flexDirection: 'column',
                     padding: '10px',
                 }}>
-                    <Button variant="contained" size="medium" color='info' sx={{
+                    <Button type="submit" variant="contained" size="medium" color='info' sx={{
                         marginBottom: "2%"
-                    }} onClick={(e) => {
-                        e.preventDefault();
-                    }}>
+                    }} onClick={handleSubmit}>
                         Sign In
                     </Button>
-                    <Button variant="contained" size="medium" color='error'>
+                    <Button variant="contained" size="medium" color='error' onClick={(e) => {
+                        setInfo({
+                            email: 'test@gmail.com',
+                            password: 'pass123',
+                        })
+                        handleSubmit(e);
+                    }}>
                         Get Guest Credentials
                     </Button>
                 </Box>
