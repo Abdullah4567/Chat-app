@@ -4,7 +4,7 @@ const cors = require('cors')
 const { port, applicationName } = require('./config/config')
 const connectToMongo = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
-const errorHandler = require('./middlewares/errorHandler')
+const { errorHandler, notFound } = require('./middlewares/errorMiddlewares')
 
 
 app.use(cors());
@@ -15,6 +15,7 @@ app.use(express.json()); // to accept json data
 app.use('/api/user', userRoutes);
 
 // Route not Found
+app.use(notFound)
 app.use(errorHandler)
 
 app.listen(port, () => {
