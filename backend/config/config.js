@@ -5,5 +5,6 @@ module.exports = {
     port: process.env.PORT,
     applicationName: process.env.APPLICATION_NAME,
     baseUrl: process.env.BASE_URL,
-    mongoUri: process.env.MONGO_URI
+    mongoUri: process.env.MONGO_URI,
+    secretKey: process.env.SECRET_KEY
 }

@@ -10,10 +10,10 @@ const validateSignUp = (requestBody) => {
         abortEarly: false
     });
     if (error) {
-        console.log(error.details)
+        // console.log(error.details)
         const errorDetails = []
         error.details.forEach((elem) => {
-            console.log(elem.message)
+            // console.log(elem.message)
             errorDetails.push(elem.message)
         })
         const err = new Error(errorDetails);

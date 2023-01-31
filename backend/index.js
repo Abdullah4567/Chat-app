@@ -16,8 +16,10 @@ app.use('/api/user', userRoutes);
 
 // Route not Found
 app.use(notFound)
+
 app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`${applicationName} listening on ${port}`);
 });
+
