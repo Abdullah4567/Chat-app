@@ -9,31 +9,35 @@ const registerUser = async (req, res, next) => {
         const { error, value } = validateSignUp(req.body);
         if (!error) {
             const { name, email, password } = req.body;
+            console.log(req.file)
             const user = await User.findOne({ email });
             if (!user) {
                 // hashing Password
                 const pass = await hashPassword(password);
 
                 // upload image to cloudinary
+                const cloudinaryResponse = await cloudinary.v2.uploader.upload(req.file.path, {
+                    folder: "ChatApp"
+                });
 
+                // console.log(cloudinaryResponse.secure_url)
                 const newUser = await User.create({
                     email: email,
                     name: name,
-                    password: pass
+                    password: pass,
+                    picture: cloudinaryResponse.secure_url
                 })
-                const cloudinaryResponse = await cloudinary.v2.uploader.upload(newUser.picture, {
-                    folder: "ChatApp"
-                });
-                console.log(cloudinaryResponse.secure_url)
                 const token = await generateToken(newUser.id);
                 return res.status(200).json({
                     success: true,
-                    token: token,
-                    user: {
-                        id: newUser.id,
-                        name: newUser.name,
-                        email: newUser.email,
-                        picture: cloudinaryResponse.secure_url
+                    date: {
+                        token: token,
+                        user: {
+                            id: newUser.id,
+                            name: newUser.name,
+                            email: newUser.email,
+                            picture: cloudinaryResponse.secure_url
+                        }
                     }
                 })
             }
@@ -62,11 +66,14 @@ const login = async (req, res, next) => {
                     const token = await generateToken(user.id);
                     return res.status(200).json({
                         success: true,
-                        token: token,
-                        user: {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email
+                        date: {
+                            token: token,
+                            user: {
+                                id: newUser.id,
+                                name: newUser.name,
+                                email: newUser.email,
+                                picture: cloudinaryResponse.secure_url
+                            }
                         }
                     })
                 }
