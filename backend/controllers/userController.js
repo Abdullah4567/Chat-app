@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const generateToken = require('../config/generateToken');
 const hashPassword = require('../config/hashPassword');
 const verifyPassword = require('../config/verifyPassword');
+const cloudinary = require('../storage/cloudinary');
 const registerUser = async (req, res, next) => {
     try {
         const { error, value } = validateSignUp(req.body);
@@ -10,12 +11,20 @@ const registerUser = async (req, res, next) => {
             const { name, email, password } = req.body;
             const user = await User.findOne({ email });
             if (!user) {
+                // hashing Password
                 const pass = await hashPassword(password);
+
+                // upload image to cloudinary
+
                 const newUser = await User.create({
                     email: email,
                     name: name,
                     password: pass
                 })
+                const cloudinaryResponse = await cloudinary.v2.uploader.upload(newUser.picture, {
+                    folder: "ChatApp"
+                });
+                console.log(cloudinaryResponse.secure_url)
                 const token = await generateToken(newUser.id);
                 return res.status(200).json({
                     success: true,
@@ -23,7 +32,8 @@ const registerUser = async (req, res, next) => {
                     user: {
                         id: newUser.id,
                         name: newUser.name,
-                        email: newUser.email
+                        email: newUser.email,
+                        picture: cloudinaryResponse.secure_url
                     }
                 })
             }

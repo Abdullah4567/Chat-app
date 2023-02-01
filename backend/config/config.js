@@ -6,5 +6,8 @@ module.exports = {
     applicationName: process.env.APPLICATION_NAME,
     baseUrl: process.env.BASE_URL,
     mongoUri: process.env.MONGO_URI,
-    secretKey: process.env.SECRET_KEY
+    secretKey: process.env.SECRET_KEY,
+    cloudName: process.env.CLOUD_NAME,
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
 }
