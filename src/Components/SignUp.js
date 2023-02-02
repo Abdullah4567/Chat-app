@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, IconButton, Input, InputLabel, Typography, FormControl, FormGroup } from '@mui/material';
+import { Avatar, Button, IconButton, Input, FormGroup, FormControl, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { AlertContext } from '../contextProvider/AlertProvider'
 
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const { showAlert } = useContext(AlertContext)
     const [Info, setInfo] = useState({
         name: "",
         email: "",
@@ -36,6 +38,16 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(Info)
+
+        // Make an HTTP request  to Create User with form data
+        if (Info.name && Info.email && Info.password && Info.picture) {
+
+        }
+        else {
+            showAlert("Please Fill all Fields", "error")
+
+        }
+
     }
     return (
         <>
