@@ -51,6 +51,7 @@ const SignUp = () => {
     }
     return (
         <>
+            {console.log(process.env.REACT_APP_BASE_URL)}
             <Box sx={{
                 marginTop: '2%',
                 display: "flex",
