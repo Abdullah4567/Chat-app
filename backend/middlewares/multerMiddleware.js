@@ -28,13 +28,13 @@ const uploadPicture = (req, res, next) => {
         fileFilter: fileFilter
     }).single('picture');
     upload(req, res, function (error) {
-        console.log("I am in upload Method")
+        // console.log("I am in upload Method")
         if (!error) {
             return (next());
         }
         else {
             const err = new Error(error.message);
-            console.log("ERrored: " + err.message)
+            // console.log("ERrored: " + err.message)
             err.status = 400;
             throw err;
         }

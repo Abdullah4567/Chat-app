@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,10 +7,12 @@ import { Avatar, Button, IconButton, Input, FormGroup, FormControl, Typography }
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { AlertContext } from '../contextProvider/AlertProvider'
+import { SignUp as ValidateSignUp } from '../services/Auth'
 
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const navigate = useNavigate();
     const { showAlert } = useContext(AlertContext)
     const [Info, setInfo] = useState({
         name: "",
@@ -35,13 +38,22 @@ const SignUp = () => {
             </IconButton >
         )
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(Info)
-
-        // Make an HTTP request  to Create User with form data
+        // console.log(Info)
         if (Info.name && Info.email && Info.password && Info.picture) {
-
+            const res = await ValidateSignUp(Info);
+            console.log(res);
+            if (res.success) {
+                showAlert("Sign Up Successfull", "success")
+                localStorage.setItem('user', JSON.stringify(res.data));
+                setTimeout(() => {
+                    navigate('/chats')
+                }, 2000);
+            }
+            else {
+                showAlert(res.message, "error")
+            }
         }
         else {
             showAlert("Please Fill all Fields", "error")
@@ -51,7 +63,6 @@ const SignUp = () => {
     }
     return (
         <>
-            {console.log(process.env.REACT_APP_BASE_URL)}
             <Box sx={{
                 marginTop: '2%',
                 display: "flex",

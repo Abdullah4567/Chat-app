@@ -35,7 +35,7 @@ const validateLogin = (requestBody) => {
         abortEarly: false
     });
     if (error) {
-        // console.log(error.details)
+        console.log(error.details)
         const errorDetails = []
         error.details.forEach((elem) => {
             // console.log(elem.message)

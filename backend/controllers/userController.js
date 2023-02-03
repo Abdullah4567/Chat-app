@@ -30,9 +30,9 @@ const registerUser = async (req, res, next) => {
                 const token = await generateToken(newUser.id);
                 return res.status(200).json({
                     success: true,
-                    date: {
-                        token: token,
+                    data: {
                         user: {
+                            token: token,
                             id: newUser.id,
                             name: newUser.name,
                             email: newUser.email,
@@ -66,13 +66,13 @@ const login = async (req, res, next) => {
                     const token = await generateToken(user.id);
                     return res.status(200).json({
                         success: true,
-                        date: {
-                            token: token,
+                        data: {
                             user: {
-                                id: newUser.id,
-                                name: newUser.name,
-                                email: newUser.email,
-                                picture: cloudinaryResponse.secure_url
+                                token: token,
+                                id: user.id,
+                                name: user.name,
+                                email: user.email,
+                                picture: user.picture
                             }
                         }
                     })

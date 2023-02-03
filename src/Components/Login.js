@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Avatar, Button, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import { Login as ValidateLogin } from '../services/Auth'
+import { AlertContext } from '../contextProvider/AlertProvider';
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const { showAlert } = useContext(AlertContext)
+    const navigate = useNavigate();
     const [Info, setInfo] = useState({
         email: '',
         password: '',
@@ -31,9 +36,26 @@ const Login = () => {
             </IconButton >
         )
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(Info)
+        if (Info.email && Info.password) {
+            const res = await ValidateLogin(Info);
+            // console.log(res);
+            if (res.success) {
+                showAlert("Login Successfull", "success")
+                localStorage.setItem('user', JSON.stringify(res.data));
+                setTimeout(() => {
+                    navigate('/chats')
+                }, 2000);
+            }
+            else {
+                showAlert(res.message, "error")
+            }
+        }
+        else {
+            showAlert("Please Fill all Fields", "error")
+
+        }
     }
     return (
         <>
