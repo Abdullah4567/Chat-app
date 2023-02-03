@@ -4,6 +4,7 @@ const generateToken = require('../config/generateToken');
 const hashPassword = require('../config/hashPassword');
 const verifyPassword = require('../config/verifyPassword');
 const cloudinary = require('../storage/cloudinary');
+const { response } = require('express');
 const registerUser = async (req, res, next) => {
     try {
         const { error, value } = validateSignUp(req.body);
@@ -89,4 +90,16 @@ const login = async (req, res, next) => {
         next(error);
     }
 }
-module.exports = { registerUser, login }
+const getAllUsers = (req, res, next) => {
+    try {
+        res.status(200).json({
+            success: true,
+            user: req.user
+        })
+
+    } catch (error) {
+
+    }
+
+}
+module.exports = { registerUser, login, getAllUsers }

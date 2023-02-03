@@ -17,7 +17,7 @@ const Alert = () => {
     };
 
     return (
-        <Snackbar open={alert.show} autoHideDuration={4000} onClose={handleClose} >
+        <Snackbar open={alert.show} autoHideDuration={2000} onClose={handleClose} >
             <AlertWrapper onClose={handleClose} severity={alert.type}>
                 {alert.message}
             </AlertWrapper>
