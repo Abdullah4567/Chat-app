@@ -8,10 +8,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { AlertContext } from '../contextProvider/AlertProvider'
 import { SignUp as ValidateSignUp } from '../services/Auth'
+import { LoadingButton } from '@mui/lab';
 
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const [Loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const { showAlert } = useContext(AlertContext)
     const [Info, setInfo] = useState({
@@ -41,6 +43,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(Info)
+        setLoading(true);
         if (Info.name && Info.email && Info.password && Info.picture) {
             const res = await ValidateSignUp(Info);
             console.log(res);
@@ -59,6 +62,7 @@ const SignUp = () => {
             showAlert("Please Fill all Fields", "error")
 
         }
+        setLoading(false);
 
     }
     return (
@@ -135,11 +139,11 @@ const SignUp = () => {
                             flexDirection: 'column',
                             padding: '10px',
                         }}>
-                            <Button type="submit" variant="contained" size="medium" color='info' sx={{
+                            <LoadingButton loading={Loading} loadingIndicator="Creating An Account..." type="submit" variant="contained" size="medium" color='info' sx={{
                                 marginBottom: "2%"
                             }} onClick={handleSubmit}>
                                 Sign Up
-                            </Button>
+                            </LoadingButton>
                         </Box>
                     </FormControl>
                 </FormGroup>

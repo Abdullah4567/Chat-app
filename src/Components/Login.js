@@ -8,11 +8,13 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { Login as ValidateLogin } from '../services/Auth'
 import { AlertContext } from '../contextProvider/AlertProvider';
+import { LoadingButton } from '@mui/lab';
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const { showAlert } = useContext(AlertContext)
+    const [Loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const [Info, setInfo] = useState({
         email: '',
@@ -38,24 +40,29 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (Info.email && Info.password) {
-            const res = await ValidateLogin(Info);
-            // console.log(res);
-            if (res.success) {
-                showAlert("Login Successfull", "success")
-                localStorage.setItem('user', JSON.stringify(res.data));
-                setTimeout(() => {
-                    navigate('/chats')
-                }, 2000);
+        setLoading(true)
+        setTimeout(async () => {
+            if (Info.email && Info.password) {
+                const res = await ValidateLogin(Info);
+                // console.log(res);
+                if (res.success) {
+                    showAlert("Login Successfull", "success")
+                    localStorage.setItem('user', JSON.stringify(res.data));
+                    setTimeout(() => {
+                        navigate('/chats')
+                    }, 2000);
+                }
+                else {
+                    showAlert(res.message, "error")
+                }
             }
             else {
-                showAlert(res.message, "error")
-            }
-        }
-        else {
-            showAlert("Please Fill all Fields", "error")
+                showAlert("Please Fill all Fields", "error")
 
-        }
+            }
+            setLoading(false)
+        }, 1000);
+
     }
     return (
         <>
@@ -102,11 +109,11 @@ const Login = () => {
                     flexDirection: 'column',
                     padding: '10px',
                 }}>
-                    <Button type="submit" variant="contained" size="medium" color='info' sx={{
+                    <LoadingButton type="submit" variant="contained" size="medium" color='info' sx={{
                         marginBottom: "2%"
-                    }} onClick={handleSubmit}>
+                    }} loading={Loading} loadingIndicator="Logging In..." onClick={handleSubmit}>
                         Sign In
-                    </Button>
+                    </LoadingButton>
                     <Button variant="contained" size="medium" color='error' onClick={(e) => {
                         setInfo({
                             email: 'test@gmail.com',
