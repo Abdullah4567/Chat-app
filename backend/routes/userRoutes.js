@@ -11,6 +11,7 @@ router.post('/createuser', uploadPicture, registerUser)
 //  /api/user/login --  No Login Required
 router.post('/login', login)
 
+//  /api/user?search  -- Login Required
 router.get('/', verifyToken, getAllUsers)
 
 module.exports = router

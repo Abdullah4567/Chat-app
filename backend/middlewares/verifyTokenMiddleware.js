@@ -9,10 +9,14 @@ const verifyToken = async (req, res, next) => {
             console.log(token);
             // verify Jwt Token
             const decoded = jwt.verify(token, secretKey);
-            const user = await User.findOne({ id: decoded.id })
-            if (user) {
-                req.user = user;
-                next();
+            // console.log(decoded)
+            if (decoded.id != null) {
+
+                const user = await User.findOne({ _id: decoded.id })
+                if (user) {
+                    req.user = user;
+                    next();
+                }
             }
             else {
                 const err = new Error('Invalid Token');

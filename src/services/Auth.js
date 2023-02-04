@@ -9,10 +9,10 @@ export const SignUp = async (obj) => {
         headers: { 'Content-Type': 'multipart/form-data' }
     }).then((res) => {
         // console.log("I am in Then")
-        console.log(res.data)
+        // console.log(res.data)
         return res.data
     }).catch((err) => {
-        console.log(err.response.data)
+        // console.log(err.response.data)
         return err.response.data
     })
 

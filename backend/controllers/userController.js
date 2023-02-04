@@ -90,11 +90,29 @@ const login = async (req, res, next) => {
         next(error);
     }
 }
-const getAllUsers = (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
     try {
+        console.log(req.user);
+        const query = req.query.search ? {
+            $or: [{
+                name: {
+                    $regex: req.query.search, $options: "i"
+                },
+                email: {
+                    $regex: req.query.search, $options: "i"
+                }
+            }],
+            $and: [{
+                _id: {
+                    $ne: req.user.id
+                }
+            }]
+        } : {}
+
+        const users = await User.find(query);
         res.status(200).json({
             success: true,
-            user: req.user
+            users: users
         })
 
     } catch (error) {

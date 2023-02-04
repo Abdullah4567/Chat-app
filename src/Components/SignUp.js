@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Avatar, Button, IconButton, Input, FormGroup, FormControl, Typography } from '@mui/material';
+import { Avatar, IconButton, Input, FormGroup, FormControl, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { AlertContext } from '../contextProvider/AlertProvider'
@@ -46,7 +46,7 @@ const SignUp = () => {
         setLoading(true);
         if (Info.name && Info.email && Info.password && Info.picture) {
             const res = await ValidateSignUp(Info);
-            console.log(res);
+            // xconsole.log(res);
             if (res.success) {
                 showAlert("Sign Up Successfull", "success")
                 localStorage.setItem('user', JSON.stringify(res.data));
