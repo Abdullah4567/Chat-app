@@ -4,7 +4,6 @@ const generateToken = require('../config/generateToken');
 const hashPassword = require('../config/hashPassword');
 const verifyPassword = require('../config/verifyPassword');
 const cloudinary = require('../storage/cloudinary');
-const { response } = require('express');
 const registerUser = async (req, res, next) => {
     try {
         const { error, value } = validateSignUp(req.body);
@@ -53,7 +52,6 @@ const registerUser = async (req, res, next) => {
         next(error);
     }
 }
-
 const login = async (req, res, next) => {
     try {
         const { error, value } = validateLogin(req.body);
@@ -92,7 +90,7 @@ const login = async (req, res, next) => {
 }
 const getAllUsers = async (req, res, next) => {
     try {
-        console.log(req.user);
+        // console.log(req.user);
         const query = req.query.search ? {
             $or: [{
                 name: {
@@ -116,7 +114,7 @@ const getAllUsers = async (req, res, next) => {
         })
 
     } catch (error) {
-
+        next(error);
     }
 
 }
