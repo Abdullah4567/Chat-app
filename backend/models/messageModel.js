@@ -3,7 +3,7 @@ const messageModel = mongoose.Schema(
     {
         sender: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:"User",
+            ref: "User",
         },
         content: {
             type: String,
@@ -11,11 +11,11 @@ const messageModel = mongoose.Schema(
         },
         chat: {
             type: mongoose.Schema.Types.ObjectId,
-            ref:"User",
+            ref: "Chat",
         },
     },
     {
-         timestamps: true,
+        timestamps: true,
     }
 );
 const Message = mongoose.model('Message', messageModel);

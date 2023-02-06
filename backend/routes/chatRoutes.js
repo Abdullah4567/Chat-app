@@ -1,13 +1,14 @@
 const express = require('express');
+const { getChat } = require('../controllers/chatController');
 const verifyToken = require('../middlewares/verifyTokenMiddleware');
 const router = express.Router();
 
+//  /api/chat/  -- Login Required  
+router.post('/', verifyToken, getChat)
 
 //  /api/chat/  -- Login Required
 // router.get('/', verifyToken, getAllChats)
 
-//  /api/chat/  -- Login Required
-// router.post('/', verifyToken, createChat)
 
 //  /api/chat/group  -- Login Required
 // router.post('/group', verifyToken, createGroup)
