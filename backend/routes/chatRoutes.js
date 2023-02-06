@@ -1,5 +1,5 @@
 const express = require('express');
-const { getChat } = require('../controllers/chatController');
+const { getChat, getAllChats, createGroup } = require('../controllers/chatController');
 const verifyToken = require('../middlewares/verifyTokenMiddleware');
 const router = express.Router();
 
@@ -7,11 +7,11 @@ const router = express.Router();
 router.post('/', verifyToken, getChat)
 
 //  /api/chat/  -- Login Required
-// router.get('/', verifyToken, getAllChats)
+router.get('/', verifyToken, getAllChats)
 
 
 //  /api/chat/group  -- Login Required
-// router.post('/group', verifyToken, createGroup)
+router.post('/group', verifyToken, createGroup)
 
 //  /api/chat/ -- Login Required
 // router.delete('/', verifyToken,deleteGroup)
