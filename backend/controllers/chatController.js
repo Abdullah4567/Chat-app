@@ -58,8 +58,8 @@ const getAllChats = async (req, res, next) => {
                 }
             }).populate('users', '-password').populate('groupAdmin', '-password')
             .populate('latestMessage');
-
-        chats = await User.populate({
+        console.log("Hello here I am ");
+        chats = await User.populate(chats, {
             path: 'latestMessage.sender',
             select: "name email pic"
         })
@@ -131,6 +131,172 @@ const createGroup = async (req, res, next) => {
 
     }
 }
+
+const renameGroup = async (req, res, next) => {
+
+    try {
+        const err = new Error("");
+        const { chatId, chatName } = req.body;
+        if (chatId && chatName) {
+
+            let updateChat = await Chat.findByIdAndUpdate(chatId, {
+                chatName
+            }, {
+                new: true
+            });
+
+            if (!updateChat) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Chat not Found"
+                });
+            }
+            // populating Users of Chat
+            updateChat = await User.populate(updateChat, {
+                path: "users",
+                select: "name email picture"
+            })
+
+            // populating Admin of Chat
+            updateChat = await User.populate(updateChat, {
+                path: "groupAdmin",
+                select: "name email picture"
+            })
+
+
+            res.status(200).json({
+                success: true,
+                updateChat
+            });
+
+        }
+        else {
+            err.message = "Please Give Valid chatId and chatName";
+            err.status = 400;
+            throw err;
+
+        }
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+const addToGroup = async (req, res, next) => {
+    try {
+        const err = new Error("");
+        const { chatId, userId } = req.body
+        if (chatId && userId) {
+
+            let updatedChat = await Chat.findByIdAndUpdate(chatId, {
+                $addToSet: {
+                    users: { $each: [userId] }
+                }
+            }, {
+                new: true
+            })
+            // chat not exist
+            if (!updatedChat) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Chat not Found"
+                });
+            }
+            // populating Users of Group Chat
+            updatedChat = await User.populate(updatedChat, {
+                path: "users",
+                select: "name email picture"
+            })
+
+            // populating Admin of Group Chat
+            updatedChat = await User.populate(updatedChat, {
+                path: "groupAdmin",
+                select: "name email picture"
+            })
+
+            res.status(200).json({
+                success: true,
+                updatedChat
+            })
+        }
+        else {
+            err.status = 400;
+            err.message = "Please give valid chatId and userId";
+            throw err;
+
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+const removeFromGroup = async (req, res, next) => {
+    try {
+        const err = new Error("");
+        const { chatId, userId } = req.body
+        if (chatId && userId) {
+
+            let updatedChat = await Chat.findByIdAndUpdate(chatId, {
+                $pull: { users: userId }
+            }, {
+                new: true
+            })
+            // chat not exist
+            if (!updatedChat) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Chat not Found"
+                });
+            }
+            // populating Users of Group Chat
+            updatedChat = await User.populate(updatedChat, {
+                path: "users",
+                select: "name email picture"
+            })
+
+            // populating Admin of Group Chat
+            updatedChat = await User.populate(updatedChat, {
+                path: "groupAdmin",
+                select: "name email picture"
+            })
+
+            res.status(200).json({
+                success: true,
+                updatedChat
+            })
+        }
+        else {
+            err.status = 400;
+            err.message = "Please give valid chatId and userId";
+            throw err;
+
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+const deleteChat = async (req, res, next) => {
+    try {
+        const { chatId } = req.body;
+        if (chatId) {
+            let result = await Chat.findByIdAndDelete(chatId);
+            res.status(200).json({
+                success: true,
+                result
+            });
+
+        } else {
+            const err = new Error("No Chat Found");
+            err.status = 400;
+            throw err;
+        }
+
+
+    } catch (error) {
+        next(error);
+    }
+}
 module.exports = {
-    getChat, getAllChats, createGroup
+    getChat, getAllChats, createGroup, renameGroup, addToGroup, removeFromGroup, deleteChat
 }

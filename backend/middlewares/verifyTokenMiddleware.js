@@ -6,7 +6,7 @@ const verifyToken = async (req, res, next) => {
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             const token = req.headers.authorization.split(" ")[1];
 
-            console.log(token);
+            // console.log(token);
             // verify Jwt Token
             const decoded = jwt.verify(token, secretKey);
             // console.log(decoded)
