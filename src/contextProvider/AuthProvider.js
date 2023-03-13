@@ -1,9 +1,7 @@
 import React, { useState, createContext } from 'react'
 
 const AuthProvider = (props) => {
-    const [userInfo, setuserInfo] = useState({
-        user: ""
-    })
+    const [userInfo, setuserInfo] = useState({})
     return (
         <AuthContext.Provider value={{ userInfo, setuserInfo }}>
             {props.children}
