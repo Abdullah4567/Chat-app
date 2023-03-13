@@ -22,7 +22,6 @@ export const Login = async (obj) => {
         email: obj.email,
         password: obj.password
     }).then((res) => {
-        // console.log(res.data)
         return res.data
     }).catch((err) => {
         // console.log(err.response.data)

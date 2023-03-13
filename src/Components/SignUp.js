@@ -10,7 +10,7 @@ import { AlertContext } from '../contextProvider/AlertProvider'
 import { SignUp as ValidateSignUp } from '../services/Auth'
 import { LoadingButton } from '@mui/lab';
 
-const SignUp = () => {
+const SignUp = () => {  
 
     const [showPassword, setShowPassword] = React.useState(false);
     const [Loading, setLoading] = useState(false)

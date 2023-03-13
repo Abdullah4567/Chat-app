@@ -8,12 +8,14 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { Login as ValidateLogin } from '../services/Auth'
 import { AlertContext } from '../contextProvider/AlertProvider';
+import { AuthContext } from '../contextProvider/AuthProvider';
 import { LoadingButton } from '@mui/lab';
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const { showAlert } = useContext(AlertContext)
+    const { userInfo, setuserInfo } = useContext(AuthContext)
     const [Loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const [Info, setInfo] = useState({
@@ -48,6 +50,8 @@ const Login = () => {
                 if (res.success) {
                     showAlert("Login Successfull", "success")
                     localStorage.setItem('user', JSON.stringify(res.data));
+                    // Set Info of User to Auth Context
+                    setuserInfo(res.data);
                     setTimeout(() => {
                         navigate('/chats')
                     }, 2000);
