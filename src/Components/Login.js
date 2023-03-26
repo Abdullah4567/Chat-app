@@ -19,8 +19,8 @@ const Login = () => {
     const [Loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const [Info, setInfo] = useState({
-        email: '',
-        password: '',
+        email: 'abdullah@gmail.com',
+        password: 'abc',
     });
     const handleChange = (e) => {
         setInfo({
@@ -51,6 +51,7 @@ const Login = () => {
                     showAlert("Login Successfull", "success")
                     localStorage.setItem('user', JSON.stringify(res.data));
                     // Set Info of User to Auth Context
+                    console.log(res.data);
                     setuserInfo(res.data);
                     setTimeout(() => {
                         navigate('/chats')
