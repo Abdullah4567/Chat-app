@@ -1,12 +1,16 @@
 import { Box } from '@mui/material';
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import ChatBox from '../Components/ChatBox';
 import MyChats from '../Components/MyChats';
 import SideDrawer from '../Components/SideDrawer';
 import { AuthContext } from '../contextProvider/AuthProvider'
 
 const ChatBoard = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, updateUserState } = useContext(AuthContext);
+  useEffect(() => {
+    updateUserState();
+  }, [])
+
 
   return (
     <div style={{ width: "100%", padding: "1px" }}>

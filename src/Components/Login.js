@@ -55,7 +55,7 @@ const Login = () => {
                     setuserInfo(res.data);
                     setTimeout(() => {
                         navigate('/chats')
-                    }, 2000);
+                    }, 1000);
                 }
                 else {
                     showAlert(res.message, "error")

@@ -24,7 +24,7 @@ const SideDrawer = () => {
         p: 2,
         borderRadius: 2
     };
-    const { userInfo } = useContext(AuthContext)
+    const { userInfo, handleLogout } = useContext(AuthContext)
     const navigate = useNavigate();
     const [search, setsearch] = useState("")
     const [searchResult, setsearchResult] = useState("")
@@ -36,11 +36,7 @@ const SideDrawer = () => {
         setanchorEl(null);
         setopen(false);
     }
-    const hanldeLogout = (e) => {
-        localStorage.clear();
-        navigate('/');
 
-    }
     const closeModal = () => {
         console.log("I am closed")
         setmodal(false);
@@ -125,7 +121,7 @@ const SideDrawer = () => {
                                 <span onClick={() => setmodal(true)}> My Profile</span>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
-                                <span onClick={hanldeLogout}>
+                                <span onClick={handleLogout}>
                                     Logout
                                 </span>
                             </MenuItem>

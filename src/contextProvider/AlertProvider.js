@@ -16,7 +16,7 @@ const AlertProvider = (props) => {
         setAlert({
             show: false,
             message: '',
-            type: 'error'
+            type: ''
         })
     }
     return (
