@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Menu, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Button, Drawer, Menu, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,6 +10,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+
 
 const SideDrawer = () => {
     const style = {
@@ -32,13 +34,14 @@ const SideDrawer = () => {
     const [anchorEl, setanchorEl] = useState(null)
     const [open, setopen] = useState(false)
     const [modal, setmodal] = useState(false)
+    const [isDrawerOpen, setisDrawerOpen] = useState(false)
     const handleClose = () => {
         setanchorEl(null);
         setopen(false);
     }
 
     const closeModal = () => {
-        console.log("I am closed")
+        // console.log("I am closed")
         setmodal(false);
     }
     return (
@@ -95,7 +98,7 @@ const SideDrawer = () => {
                 <Tooltip title="Search User" placement="bottom">
                     <Button variant="">
                         <SearchIcon fontSize="small" />
-                        <Typography variant="button" component="">
+                        <Typography variant="button" component="" onClick={() => setisDrawerOpen(true)}>
                             Search User
                         </Typography>
                     </Button>
@@ -129,6 +132,22 @@ const SideDrawer = () => {
                     </Menu>
                 </Box>
             </Box>
+            <Drawer anchor='left' open={isDrawerOpen} onClose={() => setisDrawerOpen(false)}>
+                <Box p={2}>
+                    <Typography variant="h5" component="div">
+                        <TextField
+                            // required
+                            name="search"
+                            value={search}
+                            // id="outlined-required"
+                            label="Search by Name or email"
+                            // autoComplete='off'
+                            size='small'
+                            onChange={(e) => setsearch(e.target.value)}
+                        />
+                    </Typography>
+                </Box>
+            </Drawer>
         </>
     )
 }
