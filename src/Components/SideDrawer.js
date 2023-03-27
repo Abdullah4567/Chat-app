@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SideDrawer = () => {
     const style = {
@@ -18,11 +19,13 @@ const SideDrawer = () => {
         transform: 'translate(-50%, -50%)',
         width: 400,
         bgcolor: 'background.paper',
-        border: '2px solid #000',
+        // border: '2px solid #000',
         boxShadow: 24,
-        p: 1,
+        p: 2,
+        borderRadius: 2
     };
     const { userInfo } = useContext(AuthContext)
+    const navigate = useNavigate();
     const [search, setsearch] = useState("")
     const [searchResult, setsearchResult] = useState("")
     const [loading, setloading] = useState(false)
@@ -32,6 +35,11 @@ const SideDrawer = () => {
     const handleClose = () => {
         setanchorEl(null);
         setopen(false);
+    }
+    const hanldeLogout = (e) => {
+        localStorage.clear();
+        navigate('/');
+
     }
     const closeModal = () => {
         console.log("I am closed")
@@ -47,28 +55,31 @@ const SideDrawer = () => {
             >
                 <Box sx={style}>
                     <Card >
-                        <CardActionArea sx={{
-                            border: "2px solid black"
-                        }}>
-                            <Avatar name={userInfo ? userInfo.user?.name : "Guest user"}
-                                src={userInfo ? userInfo.user?.picture : null}
-                                sx={{ width: 200, height: 200, border: "2px solid red" }}
-                                classes="flex flex-justify-center"
-                            />
-                            {/* <CardMedia
-                                component="img"
-                                // height="140"
-                                // image="https://res.cloudinary.com/dynlh5chd/image/upload/v1675446418/ChatApp/q6eqkubgtu9ja3nd7qep.jpg"
-                                image={userInfo?.user?.picture}
-                                alt="loading"
-                            /> */}
+                        <CardActionArea>
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                                <Avatar name={userInfo.user ? userInfo.user?.name : "Guest user"}
+                                    src={userInfo ? userInfo.user?.picture : null}
+                                    sx={{ width: 150, height: 150 }}
+                                />
+                            </Box>
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
+                                <Typography variant="h5" component="div" sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center"
+
+                                }}>
+                                    {userInfo.user != null ? userInfo.user.name : "Anonymous"}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                <Typography variant="h6" component="div" color="text.secondary" sx={{
+                                    padding: "2px",
+                                    marginTop: "2px"
+                                }}>
+                                    Email :  {userInfo.user != null ? userInfo.user.email : "anonymous"}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -114,7 +125,9 @@ const SideDrawer = () => {
                                 <span onClick={() => setmodal(true)}> My Profile</span>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
-                                Logout
+                                <span onClick={hanldeLogout}>
+                                    Logout
+                                </span>
                             </MenuItem>
                         </MenuList>
                     </Menu>
