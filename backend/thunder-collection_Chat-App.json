@@ -1,0 +1,258 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Chat-App",
+    "dateExported": "2023-03-06T06:36:47.308Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "6301a4b7-06d0-41ae-a1ee-9d3f7000dc00",
+            "name": "User",
+            "containerId": "",
+            "created": "2023-01-30T12:22:02.633Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Chats",
+            "containerId": "",
+            "created": "2023-02-06T05:51:23.598Z",
+            "sortNum": 20000,
+            "settings": {
+                "runOptions": {
+                    "delay": 0,
+                    "iterations": 1,
+                    "dataFilePath": ""
+                }
+            }
+        }
+    ],
+    "requests": [
+        {
+            "_id": "f61f432a-16e8-4587-a91e-31c868d49511",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "6301a4b7-06d0-41ae-a1ee-9d3f7000dc00",
+            "name": "SignUp",
+            "url": "localhost:5000/api/user/createuser",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-01-30T12:22:35.409Z",
+            "modified": "2023-02-06T06:15:37.773Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Muhammad Abdullah"
+                    },
+                    {
+                        "name": "email",
+                        "value": "abdullah@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "abc"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "picture",
+                        "value": "c:\\Users\\Abdullah\\Desktop\\AvatarMaker.png"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "2bac496f-f044-4dfa-8bcf-98f8699c9dbb",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "6301a4b7-06d0-41ae-a1ee-9d3f7000dc00",
+            "name": "Login",
+            "url": "localhost:5000/api/user/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-02-01T03:52:56.514Z",
+            "modified": "2023-03-06T06:31:27.977Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"abdullah@gmail.com\",\n  \"password\":\"abc\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2a02655b-d2a8-4dd5-a382-357c5398ee2b",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Get or createChat",
+            "url": "localhost:5000/api/chats",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-02-06T05:51:36.880Z",
+            "modified": "2023-03-06T06:31:58.619Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\":\"63dd495bbb09933783eb6888\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA4NDI4NywiZXhwIjoxNjc4MTcwNjg3fQ.-DXfG2vKvGRl-2lnJaiNKArIL2IcVfc7Q5i4XO5PQVY"
+            },
+            "tests": []
+        },
+        {
+            "_id": "823e80cf-76d4-4e82-8b06-d2ac84f17864",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Get All Chats",
+            "url": "localhost:5000/api/chats",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-02-06T11:12:11.033Z",
+            "modified": "2023-03-06T06:31:37.391Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA4NDI4NywiZXhwIjoxNjc4MTcwNjg3fQ.-DXfG2vKvGRl-2lnJaiNKArIL2IcVfc7Q5i4XO5PQVY"
+            },
+            "tests": []
+        },
+        {
+            "_id": "43b861f3-c607-4d59-b0fd-aa5d332d01a8",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Create Group Chat",
+            "url": "localhost:5000/api/chats/group",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-02-06T12:05:22.793Z",
+            "modified": "2023-02-06T12:33:57.060Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"6\",\n  \"users\":\"[\\\"63dd48d4bb09933783eb687f\\\",\\\"63dd4904bb09933783eb6882\\\",\\\"63dd4984bb09933783eb688b\\\"]\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3NTY3OTE0MCwiZXhwIjoxNjc1NzY1NTQwfQ.k2E4KOLdkQgvKFdxSIDMehl46xVeRp0Hcj4qVtdsYWU"
+            },
+            "tests": []
+        },
+        {
+            "_id": "abd28b95-f2d8-4378-b8eb-0f3a919b0693",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "demo",
+            "url": "",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-02-06T12:42:32.358Z",
+            "modified": "2023-02-06T12:42:50.125Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c51f2bcf-3acc-451d-8d8f-13d1b0b4958a",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Rename Group Chat",
+            "url": "localhost:5000/api/chats/rename",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-03-06T05:11:28.895Z",
+            "modified": "2023-03-06T05:34:20.232Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"chatId\":\"63e0f6e594f811ef32a2df63\",\n  \"chatName\":\"Fams\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA3OTM2NywiZXhwIjoxNjc4MTY1NzY3fQ.0J4TtvSgJBliS3YOkagBnPJbDV3lx1pWY1tdA-BXQmw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6be89219-d4c8-444a-b18b-5030d06fd55a",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Add User To Group",
+            "url": "localhost:5000/api/chats/add-group",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2023-03-06T05:48:00.956Z",
+            "modified": "2023-03-06T05:49:49.817Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\":\"63dd492ebb09933783eb6885\",\n  \"chatId\":\"63e0f6e594f811ef32a2df63\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA3OTM2NywiZXhwIjoxNjc4MTY1NzY3fQ.0J4TtvSgJBliS3YOkagBnPJbDV3lx1pWY1tdA-BXQmw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b4727184-5101-44a3-b072-1a7b69b293c5",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Remove From Group",
+            "url": "localhost:5000/api/chats//remove-group",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-03-06T06:15:30.880Z",
+            "modified": "2023-03-06T06:16:39.591Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\":\"63dd492ebb09933783eb6885\",\n  \"chatId\":\"63e0f6e594f811ef32a2df63\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA3OTM2NywiZXhwIjoxNjc4MTY1NzY3fQ.0J4TtvSgJBliS3YOkagBnPJbDV3lx1pWY1tdA-BXQmw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "00b659e2-162b-47a1-8fbd-64e16e31f475",
+            "colId": "248d47dd-fb25-42af-8786-088da64fa71b",
+            "containerId": "a7ee4c88-1383-4fae-808e-024be9c1f56e",
+            "name": "Delete Chat",
+            "url": "localhost:5000/api/chats/",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-03-06T06:25:18.267Z",
+            "modified": "2023-03-06T06:26:02.680Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"chatId\":\"63e0f51894f811ef32a2df58\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTA5YjA5OTIzZmRhYzQ0NTZkYzgxOCIsImlhdCI6MTY3ODA3OTM2NywiZXhwIjoxNjc4MTY1NzY3fQ.0J4TtvSgJBliS3YOkagBnPJbDV3lx1pWY1tdA-BXQmw"
+            },
+            "tests": []
+        }
+    ]
+}
